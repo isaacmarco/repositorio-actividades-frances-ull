@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="titulo-con-imagen">
+    <img src="{% static 'img/icono_actividades.png' %}" alt="Icono" class="titulo-icono">
+    <h1>Inicio de sesión</h1>
+</div>
+<div class="login-container">
+    {% if form.errors %}
+        <p style="color:red;">Usuario o contraseña incorrectos</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Entrar</button>
+    </form>
+</div>
+{% endblock %}

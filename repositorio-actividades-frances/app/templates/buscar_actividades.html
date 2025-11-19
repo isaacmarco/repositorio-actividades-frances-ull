@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ <h2>Filtrar actividades por curso</h2>
+    <form method="get" action="{% url 'buscar_actividades' %}">
+        <select name="curso">
+            <option value="">--Todos--</option>
+            <option value="infantil" {% if curso_seleccionado == 'infantil' %}selected{% endif %}>Infantil</option>
+            <option value="primaria" {% if curso_seleccionado == 'primaria' %}selected{% endif %}>Primaria</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <h3>Resultados:</h3>
+    <ul>
+        {% for actividad in actividades %}
+            <li>{{ actividad.nombre }} - {{ actividad.get_curso_display }} - {{ actividad.fecha }}</li>
+        {% empty %}
+            <li>No se encontraron actividades</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

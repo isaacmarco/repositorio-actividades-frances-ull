@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
+{% block content %}
 
-</body>
-</html>
+<div class="titulo-con-imagen">
+    <img src="{% static 'img/icono_actividades.png' %}" alt="Icono" class="titulo-icono">
+    <h1>Bienvenido al repositorio de actividades de francés</h1>
+    <!--<p>Si ya tiene un usuario pulse en el botón de 'Acceso'. Si quiere crear un nuevo usuario pulse el botón 'Nuevo usuario'</p>-->
+</div>
+
+
+<nav class="menu_seccion">
+    <a href="{% url 'login' %}">Acceso</a>
+    <!--<a href="">Nuevo usuario</a>-->
+</nav>
+
+
+{% endblock %}

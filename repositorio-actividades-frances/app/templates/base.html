@@ -12,9 +12,10 @@
     <img src="{% static 'img/icono_app.png' %}" alt="Icono" class="menu-icon">
     <span class="menu-title">Repositorio de actividades de francés</span>
     <a href="{% url 'inicio' %}">🏡 Inicio</a>
-    <a href="">🔍 Buscar actividades</a>
+    <a href="{% url 'buscar_actividades' %}">🔍 Buscar actividades</a>
     <a href="{% url 'mis_actividades' %}">💼 Mis actividades</a>
     <a href="">⭐ Nueva actividad</a>
+    <a href="{% url 'logout' %}">🚪 Salir</a>
 </nav>
 {% block content %}{% endblock %}
 </body>
