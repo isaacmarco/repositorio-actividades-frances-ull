@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!--<title>{% block title %}Mi sitio{% endblock %}</title>-->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mis_actividades.css' %}">
+</head>
+<body>
+<nav class="menu">
+    <img src="{% static 'img/icono_app.png' %}" alt="Icono" class="menu-icon">
+    <span class="menu-title">Repositorio de actividades de francés</span>
+    <a href="{% url 'inicio' %}">🏡 Inicio</a>
+    <a href="">🔍 Buscar actividades</a>
+    <a href="{% url 'mis_actividades' %}">💼 Mis actividades</a>
+    <a href="">⭐ Nueva actividad</a>
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>

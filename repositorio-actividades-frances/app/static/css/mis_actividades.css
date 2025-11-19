@@ -1,0 +1,43 @@
+/* Tabla de actividades */
+.tabla-actividades {
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    /*border-radius: 6px;*/
+    overflow: hidden;
+    /*box-shadow: 0 2px 8px rgba(0,0,0,0.1);*/
+    width: 90%;          /* más estrecha */
+    max-width: 1200px;    /* límite razonable */
+    margin: 20px auto;   /* centrada */
+}
+
+.tabla-actividades thead {
+    background: #2b5876;
+    color: white;
+    text-align: left;
+}
+
+.tabla-actividades th,
+.tabla-actividades td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.tabla-actividades img {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.tabla-actividades a {
+    color: #2b5876;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.tabla-actividades a:hover {
+    text-decoration: underline;
+}

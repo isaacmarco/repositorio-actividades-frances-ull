@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    background: #2b5876;
+    padding: 10px 20px;
+    color: white;
+    gap: 15px; /* separa icono, título y botones */
+}
+
+.menu_seccion a {
+    display: inline-block;             /* que se comporte como bloque para padding */
+    background: rgba(43, 88, 118, 0.2); /* fondo suave */
+    color: #2b5876;                    /* color del texto */
+    padding: 8px 16px;                 /* espacio dentro del botón */
+    text-decoration: none;             /* quitar subrayado */
+    border-radius: 4px;                /* esquinas redondeadas */
+    transition: background 0.3s, transform 0.2s;
+    margin-left: 30px;
+}
+
+.menu_seccion a:hover {
+    background: rgba(43, 88, 118, 0.35);
+    transform: translateY(-2px);       /* efecto ligero al pasar el cursor */
+}
+
+/* Icono */
+.menu-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Título */
+.menu-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px; /* separación antes de los botones */
+}
+
+/* Botones */
+.menu a {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* Hover */
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.contenido {
+    padding: 20px;
+}
+
+.titulo-con-imagen {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-left: 30px;   /* ← mueve todo el bloque a la derecha */
+}
+
+.titulo-icono {
+    width: 40px;      /* ajusta tamaño según necesites */
+    height: 40px;
+}

@@ -7,6 +7,10 @@ from .models import Actividad
 # python manage.py makemigrations
 # python manage.py migrate
 # python manage.py runserver
+# página de iconos https://www.flaticon.es/packs/education-633
+
+def inicio(request):
+    return render(request, 'inicio.html')
 
 @login_required
 def mis_actividades(request):
