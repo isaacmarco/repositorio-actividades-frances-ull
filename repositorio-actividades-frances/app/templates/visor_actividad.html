@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/visor_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Visor de actividad</title>
+</head>
+<body>
+
+<!--
+    <h1>{{ actividad.titulo }}</h1>
+    <h2>{{ actividad.curso }}</h2>
+-->
+
+    <!-- lienzo -->
+    <div id="canvas-wrapper">
+    <div id="canvas-container">
+      <div id="canvas">
+      </div>
+    </div>
+    </div>
+    <button id="btn-corregir">Corregir</button>
+    <button id="btn-cargar">Cargar JSON de prueba</button>
+
+<script>
+    // Parseamos el CharField JSON a objeto JS
+    const el_json = JSON.parse('{{ actividad.json|default:"{}"|escapejs }}');
+    document.getElementById("btn-cargar").addEventListener("click", () => {
+        const canvas = document.getElementById("canvas");
+        // Llamamos a cargarVisor pasando el JSON completo
+        cargarVisor(el_json);
+    });
+
+    // Si quieres mostrar la imagen
+    if (el_json.imagen) {
+        const img = document.createElement("img");
+        img.src = el_json.imagen; // Si está vacío, no hace nada
+        img.alt = "{{ actividad.titulo }}";
+        document.body.appendChild(img);
+    }
+</script>
+<script src="{% static '/js/visor.js' %}?v={{ timestamp }}"></script>
+<script src="{% static 'js/corrector.js' %}"></script>
+</body>
+</html>

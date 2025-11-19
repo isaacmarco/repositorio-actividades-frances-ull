@@ -1,0 +1,157 @@
+:root {
+    --factor: 0.3; /* factor de escala del folio de actividad */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+    font-family: sans-serif;
+}
+
+#canvas-wrapper {
+    display: flex;
+    justify-content: center; /* centrar horizontal */
+    align-items: center;     /* centrar vertical */
+    height: 100vh;
+    width: 100vw;
+    background: #ccc;
+    overflow: auto;          /* scroll si canvas es más grande */
+}
+
+#canvas-container {
+    position: relative;
+    display: inline-block;   /* importante: que no ocupe 100% */
+}
+
+#canvas {
+    position: relative;
+    width: calc(2100px * var(--factor));
+    height: calc(3000px * var(--factor));    
+    background-size: cover;
+    background: #888;
+    border: 2px solid #000;
+    flex-shrink: 0;
+    /*background-image: url('https://via.placeholder.com/800x600');*/
+}
+
+.component-wrapper {
+    position: absolute;
+    touch-action: none;
+    user-select: none;
+    top: 0;
+    left: 0;
+}
+
+.component {
+    width: 100px;
+    height: 50px;
+    border: 1px solid #333;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+}
+
+.input {
+    background: #3498db;
+}
+
+.checkbox {
+    background: #2ecc71;
+    width: 30px;
+    height: 30px;
+}
+
+.boton {
+    background: rgba(209, 153, 33, 0.6);
+}
+
+.texto {
+    background: #df2de2;
+}
+
+.component-buttons {
+    display: flex;
+    justify-content: space-around; 
+    position: absolute;
+    top: -25px;
+    width: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.component-buttons > div {
+    pointer-events: auto; /* solo los botones reciben clicks */
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    background: #ccc;
+    font-weight: bold;
+}
+
+.handle {
+    cursor: grab;
+    background: #999;
+}
+
+.delete-handle { background: #f44336; color: white; }
+
+.duplicate-handle { background: #4caf50; color: white; }
+
+
+.panel-propiedades {
+    position: absolute;
+    top: 10px;
+    left: 100%;
+    margin-left: 10px;
+    width: 200px;
+    background: #fff;
+    border: 1px solid #333;
+    padding: 20px;
+}
+
+#funciones {    
+    position: absolute; /* relativo a #toolbox */
+    top: 100%;          /* justo debajo del toolbox */
+    left: 0;
+    width: 100%;        /* mismo ancho que el toolbox */
+    background: #ddd;
+    border: 1px solid #333;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#toolbox {
+    position: absolute; /* relativo a #canvas-container */
+    top: 10px;
+    left: -220px; 
+    width: 200px;
+    background: #eee;
+    border: 1px solid #333;
+    padding: 0px;
+}
+
+.toolbox-item {
+    background: #ddd;
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 6px;
+    cursor: grab;
+    user-select: none;
+}
+
+.toolbox-item:active {
+    cursor: grabbing;
+}
+
+

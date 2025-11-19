@@ -1,0 +1,27 @@
+<h1>Editar actividad</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div>
+        <label>Título</label>
+        {{ form.titulo }}
+    </div>
+
+    <div>
+        <label>Imagen actual:</label><br>
+        {% if form.instance.imagen %}
+            <img src="{{ form.instance.imagen.url }}" width="200"><br><br>
+        {% else %}
+            <p>No hay imagen</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label>Subir nueva imagen:</label>
+        {{ form.imagen }}
+    </div>
+
+
+    <button type="submit">Guardar cambios</button>
+</form>

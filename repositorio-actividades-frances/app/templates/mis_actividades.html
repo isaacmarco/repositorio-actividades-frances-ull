@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mis Actividades</title>
+</head>
+<body>
+
+<h1>Mis Actividades</h1>
+
+{% if actividades %}
+    <ul>
+        {% for actividad in actividades %}
+            <li>
+                <a href="{% url 'visor_actividad' actividad.id %}">
+                    <strong>{{ actividad.titulo }}</strong>
+                </a><br>
+                Curso: {{ actividad.curso }}<br>
+                Tags: {{ actividad.tags }}<br>
+                {% if actividad.imagen %}
+                    <img src="{{ actividad.imagen }}" alt="{{ actividad.titulo }}" width="120">
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tienes actividades creadas.</p>
+{% endif %}
+
+</body>
+</html>
