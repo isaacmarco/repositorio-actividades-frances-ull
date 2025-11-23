@@ -18,7 +18,6 @@
             <th>Título</th>
             <th>Curso</th>
             <th>Tags</th>
-            <!--<th>Imagen</th>-->
         </tr>
     </thead>
     <tbody>
@@ -31,15 +30,6 @@
             </td>
             <td>{{ actividad.curso }}</td>
             <td>{{ actividad.tags }}</td>
-            <!--
-            <td>
-                {% if actividad.imagen %}
-                    <img src="{{ actividad.imagen }}" alt="{{ actividad.titulo }}">
-                {% else %}
-                    —
-                {% endif %}
-            </td>
-            -->
         </tr>
         {% endfor %}
     </tbody>
