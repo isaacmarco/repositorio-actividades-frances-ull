@@ -1,15 +1,13 @@
-function cargarVisor(json) {
-
-   alert(json);
+function cargarVisor(json, ruta) {
 
   const visor = document.getElementById("canvas");
   const componentes = json.componentes || [];
 
   visor.innerHTML = "";
-  visor.style.backgroundImage = `url('actividad.png')`;
-  visor.style.backgroundSize = "cover";
-  visor.style.backgroundRepeat = "no-repeat";
-  visor.style.backgroundPosition = "center";
+  visor.style.backgroundImage = `url(ruta)`;
+  //visor.style.backgroundSize = "cover";
+  //visor.style.backgroundRepeat = "no-repeat";
+  //visor.style.backgroundPosition = "center";
 
 
   componentes.forEach(comp => {

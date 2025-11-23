@@ -5,19 +5,23 @@
     <title>Repositorio de actividades</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/mis_actividades.css' %}">
-    <link rel="stylesheet" href="{% static 'css/visor_style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/visor_actividad.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'css/__style.css' %}">-->
 </head>
+
 <body>
-<nav class="menu">
-    <img src="{% static 'img/icono_app.png' %}" alt="Icono" class="menu-icon">
-    <span class="menu-title">Repositorio de actividades de francés</span>
-    <a href="{% url 'inicio' %}">🏡 Inicio</a>
-    <a href="{% url 'buscar_actividades' %}">🔍 Buscar actividades</a>
-    <a href="{% url 'mis_actividades' %}">💼 Mis actividades</a>
-    <a href="">⭐ Nueva actividad</a>
-    <a href="{% url 'logout' %}">🚪 Salir</a>
-</nav>
-{% block content %}{% endblock %}
+    <nav class="menu">
+        <img src="{% static 'img/icono_app.png' %}" alt="Icono" class="menu-icon">
+        <span class="menu-title">Repositorio de actividades de francés</span>
+        <a href="{% url 'inicio' %}">🏡 Inicio</a>
+        <a href="{% url 'buscar_actividades' %}">🔍 Buscar actividades</a>
+        <a href="{% url 'mis_actividades' %}">💼 Mis actividades</a>
+        <a href="">⭐ Nueva actividad</a>
+        <a href="{% url 'logout' %}">🚪 Salir</a>
+    </nav>
+
+    <main class="contenido-principal">
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>
