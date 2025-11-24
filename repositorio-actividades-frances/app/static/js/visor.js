@@ -1,14 +1,17 @@
-function cargarVisor(json, ruta) {
+function cargarVisor(json) {
 
-  const visor = document.getElementById("canvas");
-  const componentes = json.componentes || [];
+    // obtener  el canvas desde el html
+    const visor = document.getElementById("canvas");
 
-  visor.innerHTML = "";
-  visor.style.backgroundImage = `url(ruta)`;
-  //visor.style.backgroundSize = "cover";
-  //visor.style.backgroundRepeat = "no-repeat";
-  //visor.style.backgroundPosition = "center";
+    // configurar la imagen de fondo de la actividad
+    visor.innerHTML = "";
+    visor.style.backgroundImage = `url(${json.imagen})`;
+    visor.style.backgroundSize = "cover";
+    visor.style.backgroundRepeat = "no-repeat";
+    visor.style.backgroundPosition = "center";
 
+    // obtener los componentes y procesarlos
+const componentes = json.componentes || [];
 
   componentes.forEach(comp => {
     const wrapper = document.createElement("div");
@@ -52,7 +55,6 @@ function cargarVisor(json, ruta) {
 
     elemento.style.width = comp.width + "px";
     elemento.style.height = comp.height + "px";
-    //elemento.style.boxSizing = "border-box";
 
     wrapper.appendChild(elemento);
     wrapper.dataset.correcta = comp.correcta;
@@ -64,7 +66,7 @@ function cargarVisor(json, ruta) {
 }
 
 const json = {
-  "imagen": "",
+  "imagen": "/media/actividades/teide.PNG",
   "componentes": [
     {
       "id": "checkbox_1763306975286",

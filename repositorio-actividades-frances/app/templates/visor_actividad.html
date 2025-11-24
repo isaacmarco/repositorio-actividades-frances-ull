@@ -27,7 +27,7 @@
     document.getElementById("btn-cargar").addEventListener("click", () => {
         const canvas = document.getElementById("canvas");
         // Llamamos a cargarVisor pasando el JSON completo
-        cargarVisor(el_json, '{{ actividad.imagen.url|escapejs }}');
+        cargarVisor(el_json); // '{{ actividad.imagen.url|escapejs }}');
     });
 </script>
 

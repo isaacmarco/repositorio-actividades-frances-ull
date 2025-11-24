@@ -34,7 +34,7 @@ body {
     width: calc(2100px * var(--factor));
     height: calc(3000px * var(--factor));
     background-color: #888;          /* color de respaldo */
-    background-image: url('/media/actividades/teide.PNG');
+    /*background-image: url('/media/actividades/teide.PNG');*/
     background-size: cover;           /* cubre todo el canvas */
     background-position: center;      /* centra la imagen */
     background-repeat: no-repeat;     /* no repetir */
