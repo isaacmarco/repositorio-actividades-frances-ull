@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/mis_actividades.css' %}">
     <link rel="stylesheet" href="{% static 'css/visor_actividad.css' %}">
+    <link rel="stylesheet" href="{% static 'css/editor_actividad.css' %}">
     <!--<link rel="stylesheet" href="{% static 'css/__style.css' %}">-->
 </head>
 
@@ -16,7 +17,7 @@
         <a href="{% url 'inicio' %}">🏡 Inicio</a>
         <a href="{% url 'buscar_actividades' %}">🔍 Buscar actividades</a>
         <a href="{% url 'mis_actividades' %}">💼 Mis actividades</a>
-        <a href="">⭐ Nueva actividad</a>
+        <a href="{% url 'nueva_actividad' %}">⭐ Nueva actividad</a>
         <a href="{% url 'logout' %}">🚪 Salir</a>
     </nav>
 

@@ -1,0 +1,19 @@
+.formulario-actividad {
+    margin-left: 30px;
+    background: #f0f4ff;
+    padding: 20px;
+    width: 300px;
+}
+
+.formulario-actividad input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.formulario-actividad button {
+    padding: 10px;
+    background: #2b5876;
+    color: white;
+}

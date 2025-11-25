@@ -17,6 +17,8 @@
             <th>Título</th>
             <th>Curso</th>
             <th>Tags</th>
+            <th>Editar</th>
+            <th>Borrar</th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +31,16 @@
             </td>
             <td>{{ actividad.curso }}</td>
             <td>{{ actividad.tags }}</td>
+            <td>
+                <a href="{% url 'editar_actividad' actividad.id %}">
+                    <strong>📝 Editar</strong>
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'borrar_actividad' actividad.id %}">
+                    <strong>⛔ Eliminar</strong>
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

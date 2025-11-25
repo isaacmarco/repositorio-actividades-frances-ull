@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="titulo-seccion">
+    <img src="{% static 'img/icono_actividad.png' %}" alt="Icono" class="titulo-icono">
+    <h1>Editar actividad</h1>
+</div>
+<nav class="menu-seccion">
+    <a href="">💾 Guardar</a>
+    <a href="">📃 Exportar JSON</a>
+    <a href="{% url 'borrar_actividad' form.instance.id %}">⛔ Eliminar</a>
+</nav>
+
+<form method="post" enctype="multipart/form-data" class="formulario-actividad">
+    {% csrf_token %}
+
+    <div>
+        <label>Título</label> {{ form.titulo }}
+    </div>
+
+    <div>
+        <label>Imagen actual:</label><br>
+        {% if form.instance.imagen %}
+            <img src="{{ form.instance.imagen.url }}" width="200"><br><br>
+        {% else %}
+            <p>No hay imagen</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <label>Subir nueva imagen:</label>
+        {{ form.imagen }}
+    </div>
+
+
+    <button type="submit">Guardar cambios</button>
+</form>
+
+{% endblock %}
