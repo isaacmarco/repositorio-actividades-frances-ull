@@ -7,4 +7,6 @@ class ActividadForm(forms.ModelForm):
         fields = ["titulo", "imagen"]
         widgets = {
             'imagen': forms.FileInput(attrs={'class': 'form-control'}),
+            'json': forms.HiddenInput(),
         }
+

@@ -7,34 +7,122 @@
     <h1>Editar actividad</h1>
 </div>
 <nav class="menu-seccion">
-    <a href="">💾 Guardar</a>
+    <a href="#" onclick="Guardar()">💾 Guardar</a>
     <a href="">📃 Exportar JSON</a>
+    <a href="">⬇ Descargar</a>
     <a href="{% url 'borrar_actividad' form.instance.id %}">⛔ Eliminar</a>
 </nav>
 
-<form method="post" enctype="multipart/form-data" class="formulario-actividad">
+<form method="post" enctype="multipart/form-data" class="formulario-actividad" id="formulario-actividad">
     {% csrf_token %}
-
+    <div>{{ form.titulo }}</div>
     <div>
-        <label>Título</label> {{ form.titulo }}
-    </div>
-
-    <div>
-        <label>Imagen actual:</label><br>
         {% if form.instance.imagen %}
-            <img src="{{ form.instance.imagen.url }}" width="200"><br><br>
+            <img src="{{ form.instance.imagen.url }}" width="200">
         {% else %}
-            <p>No hay imagen</p>
+            <p>Carga una imagen de fondo para la actividad</p>
         {% endif %}
     </div>
-
-    <div>
-        <label>Subir nueva imagen:</label>
-        {{ form.imagen }}
-    </div>
-
-
+    <div>{{ form.imagen }}</div>
+    <input type="hidden" id="id_json" name="json"> <!-- campo oculto para guardar el JSON generado -->
     <button type="submit">Guardar cambios</button>
 </form>
+
+
+<div id="canvas-wrapper">
+    <div id="canvas-container">
+      <div id="canvas">
+      </div>
+    </div>
+</div>
+
+<script>
+    // Al seleccionar imagen, se envía automáticamente el formulario
+    document.getElementById('{{ form.imagen.id_for_label }}').addEventListener('change', () => {
+        document.getElementById('formulario-actividad').submit();
+    });
+
+    function Guardar()
+    {
+        // alert(ObtenerImagenURL());
+        document.getElementById('id_json').value = GenerarJSON_debug();
+        alert(document.getElementById('id_json').value);
+        // document.getElementById('formulario-actividad').submit();
+    }
+
+    function ObtenerImagenURL()
+    {
+        const fileInput = document.getElementById('id_imagen');
+        let imagenValue = "";
+        if (fileInput && fileInput.files.length > 0) {
+            // Crea una URL temporal para la imagen seleccionada
+            imagenValue = URL.createObjectURL(fileInput.files[0]);
+        } else {
+            // Si no hay archivo seleccionado, usa la imagen que ya está en la base de datos (si existe)
+            // en caso contrario el campo imagen se queda en blanco en el JSON
+            {% if form.instance.imagen %}
+                imagenValue = "{{ form.instance.imagen.url|default:'' }}";
+            {% endif %}
+        }
+        return imagenValue;
+    }
+
+    function GenerarJSON_debug()
+    {
+        const exportData = {
+            imagen: ObtenerImagenURL(),
+            componentes: []
+        };
+
+        return JSON.stringify(exportData, null, 2);
+    }
+
+    function GenerarJSON()
+    {
+
+        const componentes = document.querySelectorAll('.component-wrapper');
+
+        // el objeto que vamos a devolver
+        const exportData = {
+            imagen: "{% if form.instance.imagen %}{{ form.instance.imagen.url }}{% endif %}",
+            componentes: []
+        };
+
+        componentes.forEach(comp => {
+
+            // Asegurar lectura correcta del tipo
+            const tipo = comp.getAttribute('data-tipo') ||
+                comp.getAttribute('tipo') ||
+                null;
+
+            const compDiv = comp.querySelector('.component');
+            const texto = compDiv ? compDiv.textContent.trim() : '';
+
+            const pos = getAbsolutePosition(comp);
+
+            exportData.componentes.push({
+                id: comp.id,
+                tipo: tipo,
+                x: pos.x,
+                y: pos.y,
+                width: comp.offsetWidth,
+                height: comp.offsetHeight,
+                texto: texto,
+                correcta: comp.getAttribute('data-correct') === 'true',
+                respuesta: comp.getAttribute('data-answer') || null
+            });
+        });
+    }
+
+    function getAbsolutePosition(wrapper) {
+        const dx = parseFloat(wrapper.getAttribute("data-x")) || 0;
+        const dy = parseFloat(wrapper.getAttribute("data-y")) || 0;
+        return {
+            x: wrapper.offsetLeft + dx,
+            y: wrapper.offsetTop + dy
+        };
+    }
+
+</script>
 
 {% endblock %}

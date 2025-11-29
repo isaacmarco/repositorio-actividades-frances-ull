@@ -63,7 +63,7 @@ def editar_actividad(request, pk):
         form = ActividadForm(request.POST, request.FILES, instance=actividad)
         if form.is_valid():
             form.save()
-            return redirect('mis_actividades')
+            # return redirect('mis_actividades')
     else:
         form = ActividadForm(instance=actividad)
     return render(request, "editor_actividad.html", {"form": form})

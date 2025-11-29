@@ -17,3 +17,7 @@
     background: #2b5876;
     color: white;
 }
+
+.formulario-actividad button[type="submit"] {
+    display: none;
+}
