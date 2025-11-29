@@ -141,15 +141,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 listeners: {
                     move(event) {
                         const t = event.target;
-                        const wrapper = t.parentElement;
+                        const _wrapper = t.parentElement;
                         t.style.width = event.rect.width + "px";
                         t.style.height = event.rect.height + "px";
 
                         const x = (parseFloat(wrapper.dataset.x) || 0) + event.deltaRect.left;
                         const y = (parseFloat(wrapper.dataset.y) || 0) + event.deltaRect.top;
-                        wrapper.style.transform = `translate(${x}px, ${y}px)`;
-                        wrapper.dataset.x = x;
-                        wrapper.dataset.y = y;
+                        _wrapper.style.transform = `translate(${x}px, ${y}px)`;
+                        _wrapper.dataset.x = x;
+                        _wrapper.dataset.y = y;
                     }
                 },
                 modifiers: [interact.modifiers.restrictSize({ min: { width: 40, height: 24 } })],
