@@ -20,11 +20,10 @@
     position: relative;
     width: calc(2100px * var(--factor));
     height: calc(3000px * var(--factor));
-    background-color: #888;          /* color de respaldo */
-    /*background-image: url('/media/actividades/teide.PNG');*/
-    background-size: cover;           /* cubre todo el canvas */
-    background-position: center;      /* centra la imagen */
-    background-repeat: no-repeat;     /* no repetir */
+    background-color: #888;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border: 2px solid #000;
     flex-shrink: 0;
 }

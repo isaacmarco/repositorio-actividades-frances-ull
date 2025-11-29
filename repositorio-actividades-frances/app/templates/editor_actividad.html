@@ -32,9 +32,33 @@
 <div id="canvas-wrapper">
     <div id="canvas-container">
       <div id="canvas">
+
+          <!-- espacio para los componentes -->
+
+        <!--  barra de componentes -->
+        <div id="toolbox"></div>
+        <!-- Panel de propiedades -->
+        <div id="properties-panel" class="panel-propiedades">
+          <h4>Propiedades</h4>
+          <div id="panel-propiedades-texto">
+            <label>Texto: <input type="text" id="prop-text"></label><br><br>
+          </div>
+          <div id="panel-propiedades-correcta">
+            <label>Correcta: <input type="checkbox" id="prop-correct"></label><br><br>
+          </div>
+          <div id="panel-propiedades-respuesta-correcta">
+            <label>Respuesta correcta: <input type="text" id="prop-answer"></label>
+          </div>
+        </div>
+
       </div>
     </div>
 </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+<script src="{% static 'js/editor_componentes.js' %}"></script>
 
 <script>
     // Al seleccionar imagen, se envía automáticamente el formulario
@@ -44,25 +68,10 @@
 
     function Guardar()
     {
-        document.getElementById('id_json').value = GenerarJSON_debug();
+        // Al guardar generamos el JSON y luego usamos el boton del form para guardar el registro
+        document.getElementById('id_json').value = GenerarJSON(); // GenerarJSON_debug();
+        alert(document.getElementById('id_json').value);
         document.getElementById('formulario-actividad').submit();
-    }
-
-    function ObtenerImagenURL()
-    {
-        const fileInput = document.getElementById('id_imagen');
-        let imagenValue = "";
-        if (fileInput && fileInput.files.length > 0) {
-            // Crea una URL temporal para la imagen seleccionada
-            imagenValue = URL.createObjectURL(fileInput.files[0]);
-        } else {
-            // Si no hay archivo seleccionado, usa la imagen que ya está en la base de datos (si existe)
-            // en caso contrario el campo imagen se queda en blanco en el JSON
-            {% if form.instance.imagen %}
-                imagenValue = "{{ form.instance.imagen.url|default:'' }}";
-            {% endif %}
-        }
-        return imagenValue;
     }
 
     function GenerarJSON_debug()
@@ -71,7 +80,6 @@
             imagen: ObtenerImagenURL(),
             componentes: []
         };
-
         return JSON.stringify(exportData, null, 2);
     }
 
@@ -110,6 +118,24 @@
                 respuesta: comp.getAttribute('data-answer') || null
             });
         });
+        return JSON.stringify(exportData, null, 2);
+    }
+
+    function ObtenerImagenURL()
+    {
+        const fileInput = document.getElementById('id_imagen');
+        let imagenValue = "";
+        if (fileInput && fileInput.files.length > 0) {
+            // Crea una URL temporal para la imagen seleccionada
+            imagenValue = URL.createObjectURL(fileInput.files[0]);
+        } else {
+            // Si no hay archivo seleccionado, usa la imagen que ya está en la base de datos (si existe)
+            // en caso contrario el campo imagen se queda en blanco en el JSON
+            {% if form.instance.imagen %}
+                imagenValue = "{{ form.instance.imagen.url|default:'' }}";
+            {% endif %}
+        }
+        return imagenValue;
     }
 
     function getAbsolutePosition(wrapper) {

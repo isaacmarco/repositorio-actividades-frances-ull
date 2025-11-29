@@ -1,8 +1,6 @@
 // editor_componentes.js
 document.addEventListener("DOMContentLoaded", () => {
 
-    let valorMasAltoZindex = 100; // inicializamos
-
     const canvas = document.getElementById("canvas");
     const toolbox = document.getElementById("toolbox");
     const panel = document.getElementById("properties-panel");
@@ -23,10 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const contPropRespuestaCorrecta = document.getElementById('panel-propiedades-respuesta-correcta');
 
     const propiedadesPorTipo = {
-        'texto': { nombre: 'Texto', texto: true, correcta: false, respuesta: false },
-        'input': { nombre: 'Escribe', texto: false, correcta: false, respuesta: true },
-        'checkbox': { nombre: '☑️', texto: false, correcta: true, respuesta: false },
-        'boton': { nombre: 'Botón', texto: true, correcta: true, respuesta: false }
+        'texto': { texto: true, correcta: false, respuesta: false },
+        'input': { texto: false, correcta: false, respuesta: true },
+        'checkbox': { texto: false, correcta: true, respuesta: false }
     };
 
     let selectedComponent = null;
@@ -34,9 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // ---------------- TOOLBOX ----------------
     const componentes = [
         { tipo: "texto", label: "Texto" },
-        { tipo: "input", label: "Respuesta" },
-        { tipo: "checkbox", label: "Casilla" },
-        { tipo: "boton", label: "Selección" }
+        { tipo: "input", label: "Input" },
+        { tipo: "checkbox", label: "Checkbox" }
     ];
 
     componentes.forEach(c => {
@@ -57,8 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.addEventListener("drop", ev => {
         ev.preventDefault();
         const tipo = ev.dataTransfer.getData("text/plain");
-        if (!tipo)
-            return;
+        if (!tipo) return;
 
         const wrapper = crearWrapper(tipo);
         const rect = canvas.getBoundingClientRect();
@@ -69,27 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         canvas.appendChild(wrapper);
         initializeWrapper(wrapper);
-
-        // funciones ?
     });
 
     // ---------------- CREAR WRAPPER ----------------
-
     function crearWrapper(tipo) {
-
-        iconos = {
-            'mover': '🤏🏼',
-            'duplicar': '👯‍♀️',
-            'borrar': '❌',
-            'componente-respuesta': '✏️', 
-            'componente-checkbox': '☑️', 
-            'componente-checkbox-falso': '☑️', 
-            'componente-checkbox-verdadero': '☑️', 
-            'componente-boton': '👆🏻',
-            'componente-boton-falso': '👆🏻',
-            'componente-boton-verdadero': '👆🏻',
-        }
-
         const wrapper = document.createElement("div");
         wrapper.className = "component-wrapper";
         wrapper.style.position = "absolute";
@@ -102,21 +80,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const comp = document.createElement("div");
         comp.className = `component ${tipo}`;
-        comp.textContent = propiedadesPorTipo[tipo].nombre;
+        comp.textContent = tipo.charAt(0).toUpperCase() + tipo.slice(1);
+
         const buttons = document.createElement("div");
         buttons.className = "component-buttons";
 
         const handle = document.createElement("div");
         handle.className = "handle";
-        handle.textContent = iconos['mover'];
+        handle.textContent = "🖐️";
 
         const del = document.createElement("div");
         del.className = "delete-handle";
-        del.textContent = iconos['borrar'];
+        del.textContent = "✖";
 
         const dup = document.createElement("div");
         dup.className = "duplicate-handle";
-        dup.textContent = iconos['duplicar'];
+        dup.textContent = "⎘";
 
         buttons.appendChild(handle);
         buttons.appendChild(del);
@@ -140,17 +119,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Drag con handle
-
         if (typeof interact === "function") {
             interact(wrapper).unset();
             interact(wrapper).draggable({
                 allowFrom: ".handle",
                 listeners: {
-                    start(event) {
-                        // Al empezar a arrastrar, ponemos el componente encima
-                        valorMasAltoZindex++;
-                        event.target.style.zIndex = valorMasAltoZindex;
-                    },
                     move(event) {
                         const t = event.target;
                         const x = (parseFloat(t.dataset.x) || 0) + event.dx;
@@ -205,22 +178,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 const clone = wrapper.cloneNode(true);
                 clone.id = wrapper.id + "_copy_" + Date.now();
 
-                const originalX = parseFloat(wrapper.dataset.x) || 0;
-                const originalY = parseFloat(wrapper.dataset.y) || 0;
                 const top = parseFloat(wrapper.style.top) || 0;
                 const left = parseFloat(wrapper.style.left) || 0;
-
-                // Offset de duplicado
-                const offset = 20;
-
-                clone.style.top = top + "px";
+                clone.style.top = top + 20 + "px";
                 clone.style.left = left + "px";
 
-                clone.dataset.x = originalX;
-                clone.dataset.y = originalY + offset;
-
-                // Aplicamos transform para mantener la posición correcta
-                clone.style.transform = `translate(${clone.dataset.x}px, ${clone.dataset.y}px)`;
+                clone.dataset.x = 0;
+                clone.dataset.y = 0;
 
                 canvas.appendChild(clone);
                 initializeWrapper(clone);
@@ -279,22 +243,4 @@ document.addEventListener("DOMContentLoaded", () => {
         initializeWrapper(w);
     });
 
-    // cambiar imagen de actividad
-    document.getElementById("btn-set-bg").addEventListener("click", () => {
-        const url = document.getElementById("canvas-bg-url").value.trim();
-        const canvas = document.getElementById("canvas");
-        if (!url)
-            return;
-        canvas.style.backgroundImage = `url("${url}")`;
-        canvas.style.backgroundSize = "cover";
-        canvas.style.backgroundRepeat = "no-repeat";
-        canvas.style.backgroundPosition = "center";
-    });
-
-    // forzar la url de la imagen de actividad de debug    
-    canvas.style.backgroundImage = `url('actividad.png')`;
-    canvas.style.backgroundSize = "cover";
-    canvas.style.backgroundRepeat = "no-repeat";
-    canvas.style.backgroundPosition = "center";
-   
 });
