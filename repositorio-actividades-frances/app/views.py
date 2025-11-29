@@ -68,3 +68,11 @@ def editar_actividad(request, pk):
         form = ActividadForm(instance=actividad)
     return render(request, "editor_actividad.html", {"form": form})
 
+
+@login_required
+def duplicar_actividad(request, pk):
+    actividad = Actividad.objects.get(pk=pk)
+    actividad.pk = None
+    actividad.titulo = actividad.titulo + " (copia)"
+    actividad.save()
+    return redirect('editar_actividad', pk=actividad.pk)

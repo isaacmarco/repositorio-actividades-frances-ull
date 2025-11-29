@@ -27,7 +27,7 @@
         <tr>
             <td>
                 <a href="{% url 'visor_actividad' actividad.id %}">
-                    <strong>{{ actividad.titulo }}</strong>
+                    <strong>👉 {{ actividad.titulo }}</strong>
                 </a>
             </td>
             <td>{{ actividad.curso }}</td>
@@ -37,7 +37,11 @@
                     <strong>📝 Editar</strong>
                 </a>
             </td>
-            <td>Duplicar</td>
+            <td>
+                <a href="{% url 'duplicar_actividad' actividad.id %}">
+                    <strong>👯 Duplicar</strong>
+                </a>
+            </td>
             <td>
                 <a href="{% url 'borrar_actividad' actividad.id %}">
                     <strong>⛔ Eliminar</strong>
