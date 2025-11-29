@@ -7,6 +7,7 @@
     <h1>Editar actividad</h1>
 </div>
 <nav class="menu-seccion">
+    <a href="#" id="btn-cargar">📃 Cargar JSON</a>
     <a href="#" onclick="Guardar()">💾 Guardar</a>
     <a href="">📃 Exportar JSON</a>
     <a href="">⬇ Descargar</a>
@@ -59,6 +60,16 @@
 
 <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 <script src="{% static 'js/editor_componentes.js' %}"></script>
+<script src="{% static 'js/editor.js' %}"></script>
+
+<script>
+    // convertirmos CharField con el JSON a un objeto de JS
+    const json_actividad = JSON.parse('{{ form.instance.json|default:"{}"|escapejs }}');
+    document.getElementById("btn-cargar").addEventListener("click", () => {
+        // cargamos la actividad
+        cargarActividad(json_actividad);
+    });
+</script>
 
 <script>
     // Al seleccionar imagen, se envía automáticamente el formulario

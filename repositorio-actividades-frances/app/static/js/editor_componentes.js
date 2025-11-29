@@ -1,4 +1,3 @@
-// editor_componentes.js
 document.addEventListener("DOMContentLoaded", () => {
 
     const canvas = document.getElementById("canvas");

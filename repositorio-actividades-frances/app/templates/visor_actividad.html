@@ -23,13 +23,12 @@
     // Parseamos el CharField JSON a objeto JS
     const el_json = JSON.parse('{{ actividad.json|default:"{}"|escapejs }}');
     document.getElementById("btn-cargar").addEventListener("click", () => {
-        const canvas = document.getElementById("canvas");
         // Llamamos a cargarVisor pasando el JSON completo
         cargarVisor(el_json); // '{{ actividad.imagen.url|escapejs }}');
     });
 </script>
 
-<script src="{% static '/js/visor.js' %}?v={{ timestamp }}"></script>
+<script src="{% static '/js/visor.js' %}"></script>
 <script src="{% static 'js/corrector.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 

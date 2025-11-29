@@ -1,4 +1,4 @@
-function cargarVisor(json) {
+function cargarActividad(json) {
 
     // obtener  el canvas desde el html
     const visor = document.getElementById("canvas");
