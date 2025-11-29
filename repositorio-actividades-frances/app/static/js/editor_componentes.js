@@ -242,4 +242,45 @@ document.addEventListener("DOMContentLoaded", () => {
         initializeWrapper(w);
     });
 
+    window.crearWrapper = crearWrapper;
+    window.initializeWrapper = initializeWrapper;
+    window.canvas = canvas;
+    window.mostrarPanel = mostrarPanel; // opcional, pero útil
+
 });
+
+function cargarDesdeJSON(lista) {
+
+
+    lista.forEach(item => {
+        const wrapper = crearWrapper(item.tipo);
+
+        // Posición
+        wrapper.style.left = item.x + "px";
+        wrapper.style.top = item.y + "px";
+
+        wrapper.dataset.x = 0;
+        wrapper.dataset.y = 0;
+
+        // Tamaño del componente interno
+        const comp = wrapper.querySelector(".component");
+        if (item.ancho) comp.style.width = item.ancho + "px";
+        if (item.alto) comp.style.height = item.alto + "px";
+
+        // PROPIEDADES
+        if (item.texto) comp.textContent = item.texto;
+
+        if (item.correcta !== undefined)
+            wrapper.dataset.correct = item.correcta ? "true" : "false";
+
+        if (item.respuesta !== undefined)
+            wrapper.dataset.answer = item.respuesta;
+
+        // Insertarlo en el canvas
+        canvas.appendChild(wrapper);
+
+        // IMPORTANTÍSIMO → activar drag, resize, duplicado, borrado, panel…
+        initializeWrapper(wrapper);
+    });
+
+}

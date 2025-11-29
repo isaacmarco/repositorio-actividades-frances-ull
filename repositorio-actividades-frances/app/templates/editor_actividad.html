@@ -60,14 +60,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 <script src="{% static 'js/editor_componentes.js' %}"></script>
-<script src="{% static 'js/editor.js' %}"></script>
+
 
 <script>
     // convertirmos CharField con el JSON a un objeto de JS
     const json_actividad = JSON.parse('{{ form.instance.json|default:"{}"|escapejs }}');
     document.getElementById("btn-cargar").addEventListener("click", () => {
         // cargamos la actividad
-        cargarActividad(json_actividad);
+        cargarDesdeJSON(json_actividad.componentes);
     });
 </script>
 
