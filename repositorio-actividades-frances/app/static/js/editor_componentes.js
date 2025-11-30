@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const componentes = [
         { tipo: "texto", label: "Texto" },
         { tipo: "input", label: "Input" },
-        { tipo: "checkbox", label: "Checkbox" }
+        { tipo: "checkbox", label: "Checkbox" },
+        { tipo: "boton", label: "Selector" },
     ];
 
     componentes.forEach(c => {
@@ -79,7 +80,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const comp = document.createElement("div");
         comp.className = `component ${tipo}`;
-        comp.textContent = tipo.charAt(0).toUpperCase() + tipo.slice(1);
+
+        const etiquetas = {
+            texto: "Texto",
+            input: "Completar",
+            checkbox: "✅",
+            boton: "Selector",
+        };
+
+        comp.textContent = etiquetas[tipo];
 
         const buttons = document.createElement("div");
         buttons.className = "component-buttons";
@@ -131,7 +140,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         t.dataset.x = x;
                         t.dataset.y = y;
                     }
-                }
+                },
+                /*
+                modifiers: [
+                    interact.modifiers.snap({
+                        targets: [interact.snappers.grid({ x: 20, y: 20 })],  // tamaño del grid
+                        range: Infinity,
+                    })
+                ],
+                */
             });
 
             interact(wrapper.querySelector(".component")).unset();
@@ -209,10 +226,12 @@ document.addEventListener("DOMContentLoaded", () => {
         propiedadRespuestaCorrecta.value = wrapper.dataset.answer || "";
     }
 
+
     propiedadTexto.addEventListener("input", () => {
         if (!selectedComponent) return;
         selectedComponent.querySelector(".component").textContent = propiedadTexto.value;
     });
+
 
     propiedadCorrecta.addEventListener("change", () => {
         if (!selectedComponent) return;
@@ -222,6 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
     propiedadRespuestaCorrecta.addEventListener("input", () => {
         if (!selectedComponent) return;
         selectedComponent.dataset.answer = propiedadRespuestaCorrecta.value;
+         selectedComponent.querySelector(".component").textContent = propiedadRespuestaCorrecta.value;
     });
 
     // Click fuera → cerrar panel
