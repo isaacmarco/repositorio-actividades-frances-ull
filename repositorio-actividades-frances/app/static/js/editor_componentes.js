@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         handle.className = "handle";
         handle.textContent = "🖐️";
 
+        /*
         const del = document.createElement("div");
         del.className = "delete-handle";
         del.textContent = "✖";
@@ -104,10 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const dup = document.createElement("div");
         dup.className = "duplicate-handle";
         dup.textContent = "⎘";
+        */
 
         buttons.appendChild(handle);
-        buttons.appendChild(del);
-        buttons.appendChild(dup);
+        //buttons.appendChild(del);
+        //buttons.appendChild(dup);
 
         wrapper.appendChild(comp);
         wrapper.appendChild(buttons);
@@ -193,20 +195,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.stopPropagation();
                 const clone = wrapper.cloneNode(true);
                 clone.id = wrapper.id + "_copy_" + Date.now();
-
                 const top = parseFloat(wrapper.style.top) || 0;
                 const left = parseFloat(wrapper.style.left) || 0;
                 clone.style.top = top + 20 + "px";
                 clone.style.left = left + "px";
-
                 clone.dataset.x = 0;
                 clone.dataset.y = 0;
-
                 canvas.appendChild(clone);
                 initializeWrapper(clone);
             });
         }
     }
+
+
 
     // ---------------- PANEL DE PROPIEDADES ----------------
     function mostrarPanel(wrapper) {
@@ -262,10 +263,43 @@ document.addEventListener("DOMContentLoaded", () => {
         initializeWrapper(w);
     });
 
+
     window.crearWrapper = crearWrapper;
     window.initializeWrapper = initializeWrapper;
     window.canvas = canvas;
     window.mostrarPanel = mostrarPanel; // opcional, pero útil
+    window.selectedComponent = selectedComponent;
+
+    document.getElementById("btn-delete-selected").addEventListener("click", () => {
+        if (!selectedComponent) {
+            alert("No hay ningún componente seleccionado.");
+            return;
+        }
+        selectedComponent.remove();
+        selectedComponent = null;
+        panel.style.display = "none";
+    });
+
+    document.getElementById("btn-duplicate-selected").addEventListener("click", () => {
+        if (!selectedComponent) {
+            alert("No hay ningún componente seleccionado.");
+            return;
+        }
+            const clone = selectedComponent.cloneNode(true);
+                clone.id = selectedComponent.id + "_copy_" + Date.now();
+                const top = parseFloat(selectedComponent.style.top) || 0;
+                const left = parseFloat(selectedComponent.style.left) || 0;
+                clone.style.top = top + 20 + "px";
+                clone.style.left = left + "px";
+                clone.dataset.x = 0;
+                clone.dataset.y = 0;
+                canvas.appendChild(clone);
+                initializeWrapper(clone);
+
+
+    });
+
+
 
 });
 
@@ -302,5 +336,6 @@ function cargarDesdeJSON(lista) {
         // IMPORTANTÍSIMO → activar drag, resize, duplicado, borrado, panel…
         initializeWrapper(wrapper);
     });
+
 
 }
